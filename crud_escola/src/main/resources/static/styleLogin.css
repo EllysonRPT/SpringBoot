@@ -1,0 +1,23 @@
+/* styleLogin.css */
+/* Add your styles for login page here */
+#staticEmail {
+  /* Add styles for email input */
+  /* Example styles */
+  background-color: #f2f2f2;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#inputPassword {
+  /* Add styles for password input */
+  /* Example styles */
+  background-color: #f2f2f2;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
