@@ -1,3 +1,6 @@
-footer{
-  margin-bottom: auto;
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 20px; /* Espaçamento interno do rodapé */
 }

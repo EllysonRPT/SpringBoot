@@ -21,6 +21,16 @@ public class IndexController {
         ModelAndView mv = new ModelAndView("index");
         return mv;
     }
+    @GetMapping("/cadastro")
+    public ModelAndView CadIndex() {
+        ModelAndView mv = new ModelAndView("cadastro");
+        return mv;
+    }
+    @GetMapping("/login")
+    public ModelAndView loginIndex() {
+        ModelAndView mv = new ModelAndView("login");
+        return mv;
+    }
 
     @RequestMapping(value = "/login-adm", method = RequestMethod.GET)
     public ModelAndView abrirLoginAdm() {
