@@ -19,20 +19,21 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @Controller
 public class AdmController {
-    @Autowired
+    @Autowired //identifica auto escrita(bin)
    private AdmRepository ar;
    private VerificaCad_AdmRepository vcar;
 
 
-    @PostMapping("/cad-adm")
+    @PostMapping("cad-adm")
     public String postCadAdm(Adm adm) {
         // TODO: process POST request
         String cpfVerificar = vcar.findByCpf(adm.getCpf()).getCpf();
         if (cpfVerificar.equals(adm.getCpf())) {
             ar.save(adm);
+            System.out.println("SUCESSO!!!");
             
         }
-        return "adm/longin-adm";
+        return "adm/login-adm";
 
     }
 
