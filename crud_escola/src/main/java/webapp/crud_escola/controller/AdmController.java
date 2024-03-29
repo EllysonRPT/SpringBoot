@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import webapp.crud_escola.Model.Adm;
+import webapp.crud_escola.Model.VerificaCadAdm;
 import webapp.crud_escola.Repository.AdmRepository;
 import webapp.crud_escola.Repository.VerificaCad_AdmRepository;
 
@@ -21,20 +23,59 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class AdmController {
     @Autowired //identifica auto escrita(bin)
    private AdmRepository ar;
+   @Autowired
    private VerificaCad_AdmRepository vcar;
 
+   boolean aceesoInternoAdm= false;
 
+   
     @PostMapping("cad-adm")
-    public String postCadAdm(Adm adm) {
+    public ModelAndView postCadAdm(Adm adm) {
+        ModelAndView mv = new ModelAndView("adm/login-adm");
+
         // TODO: process POST request
-        String cpfVerificar = vcar.findByCpf(adm.getCpf()).getCpf();
-        if (cpfVerificar.equals(adm.getCpf())) {
+      boolean verificaCpf = vcar.existsById(adm.getCpf()) ;
+    //   VerificaCadAdm verificaNome = vcar.findByNome(adm.getNome()) ;
+
+        if (verificaCpf ) {
             ar.save(adm);
-            System.out.println("SUCESSO!!!");
+            mv.addObject("msg", "Cadastro com sucesso");
+        }else{
+            mv.addObject("msg", "Erro no Cadastro");
             
         }
-        return "adm/login-adm";
+        return mv;
 
     }
+    @PostMapping("acesso-adm")
+    public ModelAndView postLoginAdm(@RequestParam String cpf ,@RequestParam String senha) {
+        ModelAndView mv = new ModelAndView("interna/interna-adm");//pagina interna
+        boolean acessoCPF = cpf.equals(ar.findByCpf(cpf).getCpf());
+        boolean acessoSenha = senha.equals(ar.findByCpf(cpf).getSenha());
+        if (acessoCPF && acessoSenha) {
+            aceesoInternoAdm = true;
+            mv.addObject("msg", "LOGADO");
+            mv.addObject("cor", "verde");
+        }else{
+            mv.addObject("msg", "ERROR LOG");
+            mv.addObject("cor", "vermelho");
+        }
 
+        return mv;
+    }
+  
+  @GetMapping("/interna-adm")
+  public String aceessoInterno() {
+    ModelAndView mv = new ModelAndView();//pagina interna
+String acesso = "";
+    if (aceesoInternoAdm) {
+    acesso= "interna/interna-adm";
+}else{
+    acesso = "adm/login-adm";
+    mv.addObject("msg", "Login nao efetuado");
+    mv.addObject("cor", "vermelho");
+}
+      return "";
+  }
+  
 }

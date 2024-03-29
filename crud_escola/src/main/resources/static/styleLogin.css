@@ -43,6 +43,23 @@
   background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
 }
 #but{
-  text-decoration: none;
+  /* text-decoration: none; */
   background-color: #5bbd00; /* Cor de fundo do botão */
+}
+.login-container a{
+  text-decoration: none;
+  /* text-decoration: none; */
+}
+.mensagem {
+  display: block;
+  text-align: center;
+
+  padding: 5px;
+  margin: 10px auto;
+  width: 50%; /* Ajuste conforme necessário */
+}
+.verde{
+  color: green
+}.vermelho{
+  color: red;
 }
