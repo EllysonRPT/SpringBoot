@@ -31,11 +31,6 @@ public class IndexController {
         ModelAndView mv = new ModelAndView("login");
         return mv;
     }
-    // @GetMapping("/interna")
-    // public ModelAndView internaIndex() {
-    //     ModelAndView mv = new ModelAndView("interna");
-    //     return mv;
-    // }
 
     @RequestMapping(value = "/login-adm", method = RequestMethod.GET)
     public ModelAndView abrirLoginAdm() {

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import webapp.crud_escola.Model.Adm;
 import webapp.crud_escola.Model.VerificaCadAdm;
@@ -49,25 +48,17 @@ public class AdmController {
 
     }
     @PostMapping("acesso-adm")
-    public ModelAndView postLoginAdm(@RequestParam String cpf ,
-    @RequestParam String senha,
-    RedirectAttributes attributes) {
-        ModelAndView mv = new ModelAndView("redirect:/interna-adm");//pagina interna
-        
+    public ModelAndView postLoginAdm(@RequestParam String cpf ,@RequestParam String senha) {
+        ModelAndView mv = new ModelAndView("interna/interna-adm");//pagina interna
         boolean acessoCPF = cpf.equals(ar.findByCpf(cpf).getCpf());
         boolean acessoSenha = senha.equals(ar.findByCpf(cpf).getSenha());
         if (acessoCPF && acessoSenha) {
             aceesoInternoAdm = true;
             mv.addObject("msg", "LOGADO");
             mv.addObject("cor", "verde");
-             String mensagem = "Login Efetuado";
-             System.out.println(mensagem);
         }else{
-            String mensagem = " Não Efetuado";
-            System.out.println(mensagem);
             mv.addObject("msg", "ERROR LOG");
             mv.addObject("cor", "vermelho");
-            mv.setViewName("redirect:/login-adm");
         }
 
         return mv;
@@ -79,14 +70,12 @@ public class AdmController {
 String acesso = "";
     if (aceesoInternoAdm) {
     acesso= "interna/interna-adm";
-    // mv.setViewName("interna/interna-adm");
-
 }else{
     acesso = "adm/login-adm";
     mv.addObject("msg", "Login nao efetuado");
     mv.addObject("cor", "vermelho");
 }
-      return acesso;
+      return "";
   }
   
 }
