@@ -31,23 +31,25 @@ public class AdmController {
 
    
     @PostMapping("cad-adm")
-    public ModelAndView postCadAdm(Adm adm) {
-        ModelAndView mv = new ModelAndView("adm/login-adm");
-
+    public ModelAndView postCadAdm(Adm adm , RedirectAttributes attributes) {
+        ModelAndView mv = new ModelAndView("redirect:/login-adm");
         // TODO: process POST request
       boolean verificaCpf = vcar.existsById(adm.getCpf()) ;
     //   VerificaCadAdm verificaNome = vcar.findByNome(adm.getNome()) ;
-
+    // String cad = "";
         if (verificaCpf ) {
             ar.save(adm);
             mv.addObject("msg", "Cadastro com sucesso");
         }else{
-            mv.addObject("msg", "Erro no Cadastro");
-            
+            String mensagem = "ERROR CADASTRO";
+            System.out.println(mensagem);
+            mv.setViewName("redirect:/cad-adm");
+            mv.addObject("msg", "ERROR LOG");
+            mv.addObject("cor", "vermelho");
         }
         return mv;
-
     }
+
     @PostMapping("acesso-adm")
     public ModelAndView postLoginAdm(@RequestParam String cpf ,
     @RequestParam String senha,
@@ -65,9 +67,9 @@ public class AdmController {
         }else{
             String mensagem = " Não Efetuado";
             System.out.println(mensagem);
+            mv.setViewName("redirect:/login-adm");
             mv.addObject("msg", "ERROR LOG");
             mv.addObject("cor", "vermelho");
-            mv.setViewName("redirect:/login-adm");
         }
 
         return mv;
@@ -79,6 +81,8 @@ public class AdmController {
 String acesso = "";
     if (aceesoInternoAdm) {
     acesso= "interna/interna-adm";
+    mv.addObject("msg", "Login efetuado");
+    mv.addObject("cor", "verde");
     // mv.setViewName("interna/interna-adm");
 
 }else{
@@ -88,5 +92,14 @@ String acesso = "";
 }
       return acesso;
   }
-  
-}
+ 
+ @PostMapping("logout-adm")
+    public ModelAndView LogOutAdm(RedirectAttributes attributes) {
+        ModelAndView mv = new ModelAndView("redirect:/login-adm");
+        attributes.addFlashAttribute("msg", "LOG OUT");
+        attributes.addFlashAttribute("cor", "verde");
+        aceesoInternoAdm = false ;
+        return mv;
+    }
+} 
+
