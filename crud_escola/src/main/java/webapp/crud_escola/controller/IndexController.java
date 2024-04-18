@@ -23,24 +23,38 @@ public class IndexController {
     }
     @GetMapping("/cadastroAluno")
     public ModelAndView CadAlunoIndex() {
-        ModelAndView mv = new ModelAndView("/cadastroAluno");
+        ModelAndView mv = new ModelAndView("interna/cadastroAluno");
         return mv;
     }
-    @GetMapping("/cadastroProfessor")
+    @GetMapping("/cadastroProf")
     public ModelAndView CadProfIndex() {
-        ModelAndView mv = new ModelAndView("cadastroProfessor");
+        ModelAndView mv = new ModelAndView("interna/cadastroProf");
         return mv;
     }
-    @GetMapping("/login")
-    public ModelAndView loginIndex() {
-        ModelAndView mv = new ModelAndView("login");
+
+    @GetMapping("/internaProf")
+    public ModelAndView InternaProfIndex() {
+        ModelAndView mv = new ModelAndView("interna/internaProf");
         return mv;
     }
-    // @GetMapping("/interna")
-    // public ModelAndView internaIndex() {
-    //     ModelAndView mv = new ModelAndView("interna");
-    //     return mv;
-    // }
+
+    @GetMapping("/internaAluno")
+    public ModelAndView InternaAlunoIndex() {
+        ModelAndView mv = new ModelAndView("interna/internaAluno");
+        return mv;
+    }
+
+    @GetMapping("/login-aluno")
+    public ModelAndView loginAlunoIndex() {
+        ModelAndView mv = new ModelAndView("login-aluno");
+        return mv;
+    }
+    @GetMapping("/login-prof")
+    public ModelAndView loginProfIndex() {
+        ModelAndView mv = new ModelAndView("login-prof");
+        return mv;
+    }
+    
 
     @RequestMapping(value = "/login-adm", method = RequestMethod.GET)
     public ModelAndView abrirLoginAdm() {

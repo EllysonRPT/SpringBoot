@@ -17,25 +17,37 @@
 <body>
     <div th:insert="~{fragmentos/header :: header}"><!-- barra de menu --></div>
 
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">PÁGINA INTERNA</h1>
+    <h1>Lista de Alunos Matriculados</h1>
+    <ul id="alunos-lista">
+        <!-- Aqui será preenchido com os alunos usando JavaScript -->
+    </ul>
 
-        <div class="text-center mb-4">
-            <h2>Acesso Administrador</h2>
-            <ul class="list-group">
-             <a href="/cadastroAluno">  <li class="list-group-item" >Pre-Cadastro Aluno </li></a> 
-             <a href="/cadastroProf">    <li class="list-group-item">Pre-Cadastro Prof</li></a> 
-              <a href="/internaProf">   <li class="list-group-item">paginas do Professor</li></a> 
-                <a href="/internaAluno">   <li class="list-group-item">Pagina do Aluno </li></a> 
-                
-            </ul>
-        </div>
+    <script>
+        // Dados dos alunos (substitua com seus próprios dados)
+        var alunos = [
+            { nome: "João", matricula: "12345" },
+            { nome: "Maria", matricula: "67890" },
+            { nome: "Pedro", matricula: "54321" },
+            { nome: "Ana", matricula: "09876" }
+            // Adicione mais alunos conforme necessário
+        ];
 
-        <form action="logout-adm" method="post" class="text-center">
-            <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>
-        </form>
-    </div>
-
+        // Função para preencher a lista de alunos
+        function preencherListaAlunos() {
+            var lista = document.getElementById("alunos-lista");
+            // Limpa a lista antes de adicionar novos itens
+            lista.innerHTML = "";
+            // Itera sobre os alunos e os adiciona à lista
+            alunos.forEach(function(aluno) {
+                var li = document.createElement("li");
+                li.textContent = aluno.nome + " - Matrícula: " + aluno.matricula;
+                lista.appendChild(li);
+            });
+        }
+        
+        // Chama a função para preencher a lista quando a página carrega
+        window.onload = preencherListaAlunos;
+        </script>
     <div th:insert="~{fragmentos/footer :: footer}"><!-- barra de menu --></div>
 
     <script th:src="@{script.js}">

@@ -16,26 +16,37 @@
 
 <body>
     <div th:insert="~{fragmentos/header :: header}"><!-- barra de menu --></div>
+    <h1>Disciplinas Inscritas</h1>
+    <ul id="disciplinas-lista">
+        <!-- Aqui será preenchido com as disciplinas usando JavaScript -->
+    </ul>
 
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">PÁGINA INTERNA</h1>
+    <script>
+        // Dados das disciplinas (substitua com seus próprios dados)
+        var disciplinas = [
+            { nome: "Matemática", codigo: "MAT101" },
+            { nome: "História", codigo: "HIS201" },
+            { nome: "Ciências", codigo: "SCI301" },
+            { nome: "Inglês", codigo: "ENG401" }
+            // Adicione mais disciplinas conforme necessário
+        ];
 
-        <div class="text-center mb-4">
-            <h2>Acesso Administrador</h2>
-            <ul class="list-group">
-             <a href="/cadastroAluno">  <li class="list-group-item" >Pre-Cadastro Aluno </li></a> 
-             <a href="/cadastroProf">    <li class="list-group-item">Pre-Cadastro Prof</li></a> 
-              <a href="/internaProf">   <li class="list-group-item">paginas do Professor</li></a> 
-                <a href="/internaAluno">   <li class="list-group-item">Pagina do Aluno </li></a> 
-                
-            </ul>
-        </div>
+        // Função para preencher a lista de disciplinas
+        function preencherListaDisciplinas() {
+            var lista = document.getElementById("disciplinas-lista");
+            // Limpa a lista antes de adicionar novos itens
+            lista.innerHTML = "";
+            // Itera sobre as disciplinas e as adiciona à lista
+            disciplinas.forEach(function(disciplina) {
+                var li = document.createElement("li");
+                li.textContent = disciplina.nome + " - Código: " + disciplina.codigo;
+                lista.appendChild(li);
+            });
+        }
 
-        <form action="logout-adm" method="post" class="text-center">
-            <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>
-        </form>
-    </div>
-
+        // Chama a função para preencher a lista quando a página carrega
+        window.onload = preencherListaDisciplinas;
+    </script>
     <div th:insert="~{fragmentos/footer :: footer}"><!-- barra de menu --></div>
 
     <script th:src="@{script.js}">
