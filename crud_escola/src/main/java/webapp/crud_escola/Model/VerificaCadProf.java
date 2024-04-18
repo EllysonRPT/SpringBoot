@@ -1,10 +1,34 @@
 package webapp.crud_escola.Model;
 
-public class VerificaCadProf {
+import java.io.Serializable;
 
-    public boolean existsById(String cpf) {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class VerificaCadProf implements Serializable{
+    //atributos
+    @Id
+    private String cpf ;
+    private String nome;
+
+    //metodos
+
+    public String getCpf() {
+        return cpf;
+    }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public boolean existsById(String cpf2) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'existsById'");
     }
-    
+   
 }

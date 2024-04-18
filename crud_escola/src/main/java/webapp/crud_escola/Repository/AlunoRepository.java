@@ -8,7 +8,7 @@ import webapp.crud_escola.CrudEscolaApplication;
 import webapp.crud_escola.Model.Aluno;
 
 public interface AlunoRepository extends CrudRepository<Aluno,String> {
-    Optional<Aluno> findById(String cpf);
+    // Optional<Aluno> findById(String cpf);
     // Aluno findBySenha(String senha);
 }
 // 
