@@ -46,9 +46,6 @@ public class Professor implements Serializable {
         this.senha = senha;
     }
 
-    public void save(Professor pr) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
+   
 
 }

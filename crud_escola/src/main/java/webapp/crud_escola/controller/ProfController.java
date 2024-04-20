@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import webapp.crud_escola.Model.Professor;
 import webapp.crud_escola.Model.VerificaCadProf;
+import webapp.crud_escola.Repository.ProfRepository;
 
 @Controller
 public class ProfController {
@@ -15,6 +16,9 @@ public class ProfController {
     private Professor pr;
     @Autowired
     private VerificaCadProf vcar;
+ 
+    @Autowired
+    private ProfRepository pfr;
  
 
 
@@ -26,14 +30,14 @@ public class ProfController {
 
     
     @PostMapping("cadastroProf")
-    public ModelAndView postCadProf(VerificaCadProf vcar , RedirectAttributes attributes) {
+    public ModelAndView postCadProf( RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView("redirect:/login-Prof");
         // TODO: process POST request
       boolean verificaCpf = vcar.existsById(pr.getCpf()) ;
     //   VerificaCadAdm verificaNome = vcar.findByNome(adm.getNome()) ;
     // String cad = "";
         if (verificaCpf ) {
-            pr.save(pr);
+            vcar.save(pfr);
             mv.addObject("msg", "Cadastro com sucesso");
         }else{
             String mensagem = "SEM PERMISSÃO";

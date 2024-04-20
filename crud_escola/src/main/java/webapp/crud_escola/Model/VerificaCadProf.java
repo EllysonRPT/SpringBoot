@@ -26,9 +26,6 @@ public class VerificaCadProf implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public boolean existsById(String cpf2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'existsById'");
-    }
+   
    
 }

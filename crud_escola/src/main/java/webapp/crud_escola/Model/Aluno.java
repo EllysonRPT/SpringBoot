@@ -46,9 +46,5 @@ public class Aluno implements Serializable {
         this.senha = senha;
     }
 
-    public void save(Aluno pr) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
-
+   
 }
