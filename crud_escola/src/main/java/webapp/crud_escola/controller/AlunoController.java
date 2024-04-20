@@ -17,7 +17,7 @@ public class AlunoController {
 
 
     @PostMapping("cadastroAluno")
-    public ModelAndView postCadProf(VerificaCadAluno vcar , RedirectAttributes attributes) {
+    public ModelAndView postCadProf(RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView("redirect:/login-aluno");
         // TODO: process POST request
       boolean verificaCpf = vcar.existsById(pr.getCpf()) ;
