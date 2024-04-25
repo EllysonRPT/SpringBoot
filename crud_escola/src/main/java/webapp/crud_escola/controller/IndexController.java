@@ -21,9 +21,9 @@ public class IndexController {
         ModelAndView mv = new ModelAndView("index");
         return mv;
     }
-    @GetMapping("/cadastroAluno")
+    @GetMapping("/cad-aluno")
     public ModelAndView CadAlunoIndex() {
-        ModelAndView mv = new ModelAndView("interna/cadastroAluno");
+        ModelAndView mv = new ModelAndView("cad-aluno");
         return mv;
     }
     @GetMapping("/cadastroProf")

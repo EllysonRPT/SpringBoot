@@ -17,7 +17,7 @@
 
 <body>
     <div th:insert="~{fragmentos/header :: header}"></div>
-
+    <h2> <div class="mensagem"><span th:text="${msg}" th:class="${cor}"></span></div></h2>
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
@@ -27,7 +27,7 @@
                             <h3>Cadastro-ADM</h3>
                         </div>
                         <div class="card-body">
-                            <form action="cadastroAluno" method="post">
+                            <form action="cad-Aluno" method="post">
                                 <div class="mb-3">
                                     <input type="text" class="form-control" placeholder="Nome" name="nome">
                                 </div>
@@ -41,7 +41,7 @@
                                     <input type="password" class="form-control" placeholder="Senha" name="senha">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="password" class="form-control" placeholder="Confirmar Senha">
+                                    <input type="password" class="form-control" placeholder="Confirmar Senha" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-user-plus" ></i> Cadastrar</button>
                             </form>

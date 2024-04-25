@@ -12,41 +12,57 @@ import webapp.crud_escola.Repository.ProfRepository;
 
 @Controller
 public class ProfController {
-    @Autowired
+   
     private Professor pr;
-    @Autowired
+  
     private VerificaCadProf vcar;
  
     @Autowired
     private ProfRepository pfr;
- 
 
 
-
-
-
-
-
-
-    
-    @PostMapping("cadastroProf")
-    public ModelAndView postCadProf( RedirectAttributes attributes) {
+    @PostMapping("pre-cad-Prof")
+    public ModelAndView PreCadProf(Professor professor, RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView("redirect:/login-Prof");
-        // TODO: process POST request
-      boolean verificaCpf = vcar.existsById(pr.getCpf()) ;
-    //   VerificaCadAdm verificaNome = vcar.findByNome(adm.getNome()) ;
-    // String cad = "";
-        if (verificaCpf ) {
-            vcar.save(pfr);
+        
+        // Verifica se já existe um professor com o CPF fornecido
+        boolean verificaCpf = pfr.existsById(professor.getCpf());
+    
+        if (!verificaCpf) {
+            // Se o CPF não existir, salva o novo professor
+            pfr.save(professor);
             mv.addObject("msg", "Cadastro com sucesso");
-        }else{
-            String mensagem = "SEM PERMISSÃO";
+        } else {
+            // Se o CPF já existir, trata o erro de alguma maneira
+            String mensagem = "CPF já cadastrado";
             System.out.println(mensagem);
-            mv.setViewName("redirect:/cad-adm");
-            mv.addObject("msg", "ERROR LOG");
+            mv.setViewName("redirect:/alguma-pagina-de-erro");
+            mv.addObject("msg", "CPF já cadastrado");
             mv.addObject("cor", "vermelho");
         }
+        
         return mv;
     }
-
+    @PostMapping("cad-Prof")
+    public ModelAndView postCadProf(Professor professor, RedirectAttributes attributes) {
+        ModelAndView mv = new ModelAndView("redirect:/login-Prof");
+        
+        // Verifica se já existe um professor com o CPF fornecido
+        boolean verificaCpf = pfr.existsById(professor.getCpf());
+    
+        if (!verificaCpf) {
+            // Se o CPF não existir, salva o novo professor
+            pfr.save(professor);
+            mv.addObject("msg", "Cadastro com sucesso");
+        } else {
+            // Se o CPF já existir, trata o erro de alguma maneira
+            String mensagem = "CPF já cadastrado";
+            System.out.println(mensagem);
+            mv.setViewName("redirect:/alguma-pagina-de-erro");
+            mv.addObject("msg", "CPF já cadastrado");
+            mv.addObject("cor", "vermelho");
+        }
+        
+        return mv;
+    }
 }

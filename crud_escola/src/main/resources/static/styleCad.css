@@ -39,3 +39,16 @@
     align-items: center; /* Centralizar verticalmente */
     text-decoration: none;
 }
+.mensagem {
+    display: block;
+    text-align: center;
+  
+    padding: 5px;
+    margin: 10px auto;
+    width: 50%; /* Ajuste conforme necessário */
+  }
+  .verde{
+    color: green
+  }.vermelho{
+    color: red;
+  }

@@ -1,31 +1,31 @@
 package webapp.crud_escola.Model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
 @Entity
-public class VerificaCadAluno implements Serializable{
-    //atributos
+public class VerificaCadAluno {
     @Id
-    private String cpf ;
-    private String nome;
+    private String cpf;
+    private String senha;
+  
 
-    //metodos
+    // Construtor, getters e setters
 
     public String getCpf() {
         return cpf;
     }
+
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public String getNome() {
-        return nome;
+
+    public String getSenha() {
+        return senha;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
-    
-    
+
+
 }

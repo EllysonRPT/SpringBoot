@@ -1,26 +1,17 @@
 package webapp.crud_escola.Model;
 
-import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
 @Entity
-public class Aluno implements Serializable {
-    //atribito
+public class Aluno {
     @Id
     private String cpf;
     private String nome;
     private String email;
     private String senha;
+    private String confirmarSenha;
 
-    //metodos
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+    // Construtor, getters e setters
 
     public String getNome() {
         return nome;
@@ -28,6 +19,14 @@ public class Aluno implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {
@@ -46,5 +45,11 @@ public class Aluno implements Serializable {
         this.senha = senha;
     }
 
-   
+    public String getConfirmarSenha() {
+        return confirmarSenha;
+    }
+
+    public void setConfirmarSenha(String confirmarSenha) {
+        this.confirmarSenha = confirmarSenha;
+    }
 }
