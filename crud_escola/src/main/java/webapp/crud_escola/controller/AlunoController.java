@@ -32,21 +32,23 @@ public class AlunoController {
 
         boolean existeCpf = ar.existsById(aluno.getCpf());
         boolean verificaCpf = vcalur.existsById(aluno.getCpf());
+        boolean verificaSenha = vcalur.existsById(aluno.getSenha());
 
         if (verificaCpf && !existeCpf) {
-            if (!aluno.getSenha().equals(aluno.getConfirmarSenha())) {
+            if (aluno.getSenha().equals(aluno.getConfirmarSenha())  ) {
                 // Se o CPF não existir, salva o novo aluno
                 ar.save(aluno);
-                mv.addObject("msg", "Cadastro com sucesso");
+                attributes.addFlashAttribute("msg", "CADASTRO REALIZADO");
+                attributes.addFlashAttribute("cor", "verde");
             } else {
-                mv.addObject("msg", "SENHAS NÃO COINCIDEM");
-                mv.addObject("cor", "vermelho");
+                attributes.addFlashAttribute("msg", "SENHAS NÃO COINCIDEM");
+        attributes.addFlashAttribute("cor", "vermelho");
                 mv.setViewName("redirect:/cad-aluno");
             }
         } else {
             // Se o CPF já existir, trata o erro de alguma maneira
-            mv.addObject("msg", "CPF NÃO AUTORIZADO");
-            mv.addObject("cor", "vermelho");
+            attributes.addFlashAttribute("msg", "CPF NÃO AUTORIZADO");
+        attributes.addFlashAttribute("cor", "vermelho");
             mv.setViewName("redirect:/cad-aluno");
         }
         return mv;
