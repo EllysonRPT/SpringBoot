@@ -11,11 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import webapp.crud_escola.Model.Adm;
+import webapp.crud_escola.Model.Professor;
 import webapp.crud_escola.Model.VerificaCadAdm;
 import webapp.crud_escola.Model.VerificaCadAluno;
+import webapp.crud_escola.Model.VerificaCadProf;
 import webapp.crud_escola.Repository.AdmRepository;
 import webapp.crud_escola.Repository.VerificaCad_AdmRepository;
 import webapp.crud_escola.Repository.VerificaCad_AlunoRepository;
+import webapp.crud_escola.Repository.VerificaCad_ProfRepository;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +34,12 @@ public class AdmController {
     private VerificaCad_AdmRepository vcar;
     @Autowired
     private VerificaCad_AlunoRepository vcalur;
+
+    @Autowired
+   VerificaCad_ProfRepository vcpr;
+    @Autowired
+    private VerificaCadProf vcp;
+ 
 
     boolean aceesoInternoAdm = false;
 
@@ -109,7 +118,7 @@ public class AdmController {
     @PostMapping("Pre-Cad-Aluno")
     public ModelAndView PreCadProf(VerificaCadAluno aluno, BindingResult result, RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView("redirect:/cadastroAluno");
-        boolean verificaCpf = vcar.existsById(aluno.getCpf());
+        boolean verificaCpf = vcalur.existsById(aluno.getCpf());
 
         // Verifica se os campos estão vazios
         if ( !aluno.getCpf().isEmpty() && !aluno.getSenha().isEmpty() ) {
@@ -126,6 +135,29 @@ public class AdmController {
                 mv.addObject("cor", "vermelho");
             }
         }     
+        return mv;
+    }
+
+    @PostMapping("pre-cad-Prof")
+    public ModelAndView PreCadProf(VerificaCadProf Ver_professor, RedirectAttributes attributes) {
+        ModelAndView mv = new ModelAndView("redirect:/login-Prof");
+        
+        // Verifica se já existe um professor com o CPF fornecido
+        boolean verificaCpf = vcpr.existsById(Ver_professor.getCpf());
+    
+        if (!verificaCpf) {
+            // Se o CPF não existir, salva o novo professor
+            vcpr.save(Ver_professor);
+            mv.addObject("msg", "Cadastro com sucesso");
+        } else {
+            // Se o CPF já existir, trata o erro de alguma maneira
+            String mensagem = "CPF já cadastrado";
+            System.out.println(mensagem);
+            mv.setViewName("redirect:/alguma-pagina-de-erro");
+            mv.addObject("msg", "CPF já cadastrado");
+            mv.addObject("cor", "vermelho");
+        }
+        
         return mv;
     }
 }
