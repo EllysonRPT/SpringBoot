@@ -17,6 +17,8 @@
 <body>
     
     <div th:insert="~{fragmentos/header :: header}"><!-- barra de menu -->...</div>
+    <h2> <div class="mensagem"><span th:text="${msg}" th:class="${cor}"></span></div></h2>
+
     <div class="container">
         <div class="login-container">
             <h2>Login de Professor</h2>

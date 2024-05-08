@@ -71,16 +71,16 @@ public class AdmController {
         boolean acessoSenha = senha.equals(ar.findByCpf(cpf).getSenha());
         if (acessoCPF && acessoSenha) {
             aceesoInternoAdm = true;
-            mv.addObject("msg", "LOGADO");
-            mv.addObject("cor", "verde");
+            attributes.addFlashAttribute("msg", "LOGIN REALIZADO");
+            attributes.addFlashAttribute("cor", "verde");
             String mensagem = "Login Efetuado";
             System.out.println(mensagem);
         } else {
             String mensagem = " Não Efetuado";
             System.out.println(mensagem);
             mv.setViewName("redirect:/login-adm");
-            mv.addObject("msg", "ERROR LOG");
-            mv.addObject("cor", "vermelho");
+            attributes.addFlashAttribute("msg", "ERRO NO LOGIN");
+            attributes.addFlashAttribute("cor", "vermelho");
         }
 
         return mv;
