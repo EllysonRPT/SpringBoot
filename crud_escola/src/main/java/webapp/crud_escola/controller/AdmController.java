@@ -34,11 +34,9 @@ public class AdmController {
     private VerificaCad_AdmRepository vcar;
     @Autowired
     private VerificaCad_AlunoRepository vcalur;
-
     @Autowired
-   VerificaCad_ProfRepository vcpr;
-    @Autowired
-    private VerificaCadProf vcp;
+     VerificaCad_ProfRepository vcpr;
+    
  
 
     boolean aceesoInternoAdm = false;
@@ -140,7 +138,7 @@ public class AdmController {
 
     @PostMapping("pre-cad-Prof")
     public ModelAndView PreCadProf(VerificaCadProf Ver_professor, RedirectAttributes attributes) {
-        ModelAndView mv = new ModelAndView("redirect:/login-Prof");
+        ModelAndView mv = new ModelAndView("redirect:/cadastroProf");
         
         // Verifica se já existe um professor com o CPF fornecido
         boolean verificaCpf = vcpr.existsById(Ver_professor.getCpf());
@@ -148,14 +146,15 @@ public class AdmController {
         if (!verificaCpf) {
             // Se o CPF não existir, salva o novo professor
             vcpr.save(Ver_professor);
-            mv.addObject("msg", "Cadastro com sucesso");
-        } else {
+            attributes.addFlashAttribute("msg", "CADASTRO REALIZADO");
+            attributes.addFlashAttribute("cor", "verde");
+            } else {
             // Se o CPF já existir, trata o erro de alguma maneira
             String mensagem = "CPF já cadastrado";
             System.out.println(mensagem);
-            mv.setViewName("redirect:/alguma-pagina-de-erro");
-            mv.addObject("msg", "CPF já cadastrado");
-            mv.addObject("cor", "vermelho");
+            mv.setViewName("redirect:/cadastroProf");
+            attributes.addFlashAttribute("msg", "CADASTRO ERRO");
+            attributes.addFlashAttribute("cor", "vermelho");
         }
         
         return mv;
