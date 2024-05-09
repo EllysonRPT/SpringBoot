@@ -28,6 +28,26 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @Controller
 public class AdmController {
+
+
+ 
+    @RequestMapping(value = "/login-adm", method = RequestMethod.GET)
+    public ModelAndView abrirLoginAdm() {
+        ModelAndView mv = new ModelAndView("adm/login-adm");
+        return mv;
+    }
+    @RequestMapping(value = "/cad-adm", method = RequestMethod.GET)
+    public ModelAndView abrirCadAdm() {
+        ModelAndView mv = new ModelAndView("adm/cad-adm");
+        return mv;
+    }
+    @RequestMapping(value = "/cadastroAluno", method = RequestMethod.GET)
+    public ModelAndView abrirCadAluno() {
+        ModelAndView mv = new ModelAndView("interna/cadastroAluno");
+        return mv;
+    }
+
+
     @Autowired // identifica auto escrita(bin)
     private AdmRepository ar;
     @Autowired

@@ -2,6 +2,7 @@ package webapp.crud_escola.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,7 +18,13 @@ public class ProfController {
     @Autowired
     private ProfRepository pfr;
 
-
+    boolean aceesoInternoAdm = false;
+    
+    @GetMapping("/internaProf")
+    public ModelAndView InternaProfIndex() {
+        ModelAndView mv = new ModelAndView("interna/internaProf");
+        return mv;
+    }
     
     @PostMapping("cad-Prof")
     public ModelAndView postCadProf(Professor professor, RedirectAttributes attributes) {
