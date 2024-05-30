@@ -20,7 +20,7 @@ import br.com.ellyson.apirest_senai.Model.Responsavel;
 import br.com.ellyson.apirest_senai.Repository.AtivoPatrimonialRepository;
 @RestController
 @Controller
-@RequestMapping("/AtivoPatrimonial")
+@RequestMapping("/ativo")
 
 public class AtivoPatrimonialController {
     @Autowired
