@@ -19,6 +19,6 @@ public class AtivoPatrimonial implements Serializable{
     private String nome;
     @ManyToOne
     @JoinColumn(name = "id_ambiente")
-    private String ambiente;
+    private Ambiente ambiente;
 
 }
