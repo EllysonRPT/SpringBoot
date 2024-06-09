@@ -32,17 +32,7 @@ public class IndexController {
         return mv;
     }
 
-    @GetMapping("/internaProf")
-    public ModelAndView InternaProfIndex() {
-        ModelAndView mv = new ModelAndView("interna/internaProf");
-        return mv;
-    }
-
-    @GetMapping("/internaAluno")
-    public ModelAndView InternaAlunoIndex() {
-        ModelAndView mv = new ModelAndView("interna/internaAluno");
-        return mv;
-    }
+   
 
     @GetMapping("/login-aluno")
     public ModelAndView loginAlunoIndex() {
@@ -56,15 +46,5 @@ public class IndexController {
     }
     
 
-    @RequestMapping(value = "/login-adm", method = RequestMethod.GET)
-    public ModelAndView abrirLoginAdm() {
-        ModelAndView mv = new ModelAndView("adm/login-adm");
-        return mv;
-    }
-    @RequestMapping(value = "/cad-adm", method = RequestMethod.GET)
-    public ModelAndView abrirCadAdm() {
-        ModelAndView mv = new ModelAndView("adm/cad-adm");
-        return mv;
-    }
 
 }

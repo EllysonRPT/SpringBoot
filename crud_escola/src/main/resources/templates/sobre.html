@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escola XYZ</title>
+    <link rel="stylesheet" th:href="@{style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div th:insert="~{fragmentos/header :: header}"><!-- barra de menu -->...</div>
+    <p>
+        A Escola XYZ é uma instituição dedicada ao ensino de excelência, comprometida com o desenvolvimento integral dos
+        seus alunos. Fundada em [ano de fundação], a escola possui uma trajetória de sucesso na educação, destacando-se
+        pelos seguintes pontos:
+
+        Excelência Acadêmica: A Escola XYZ mantém um currículo rigoroso que atende aos mais altos padrões educacionais,
+        garantindo que os alunos adquiram conhecimentos sólidos em diversas áreas do saber.
+        Corpo Docente Qualificado: Conta com uma equipe de professores altamente qualificados e dedicados, comprometidos
+        em proporcionar uma educação de qualidade e estimular o pensamento crítico e a criatividade dos alunos.
+        Infraestrutura Moderna: Dispõe de instalações modernas e recursos tecnológicos que contribuem para o aprendizado
+        eficaz, proporcionando um ambiente propício para o desenvolvimento pessoal e acadêmico.
+        Enfoque no Desenvolvimento Integral: Além do aspecto acadêmico, a Escola XYZ valoriza a formação integral dos
+        alunos, promovendo atividades extracurriculares, esportivas, artísticas e culturais que enriquecem a experiência
+        educacional.
+        Parceria com a Comunidade: Estabelece parcerias com a comunidade local e instituições relevantes para enriquecer
+        o aprendizado dos alunos e promover a responsabilidade social.
+        Com um compromisso contínuo com a excelência educacional e o desenvolvimento dos seus alunos, a Escola XYZ se
+        destaca como uma referência na área da educação, preparando os estudantes para os desafios do mundo
+        contemporâneo.</p>
+
+    <div th:insert="~{fragmentos/footer :: footer}"><!-- barra de menu -->...</div>
+</body>
+<script th:rc="@{script.js}"></script>
+
+</html>

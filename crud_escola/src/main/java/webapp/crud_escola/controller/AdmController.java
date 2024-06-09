@@ -11,11 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import webapp.crud_escola.Model.Adm;
+import webapp.crud_escola.Model.Professor;
 import webapp.crud_escola.Model.VerificaCadAdm;
 import webapp.crud_escola.Model.VerificaCadAluno;
+import webapp.crud_escola.Model.VerificaCadProf;
 import webapp.crud_escola.Repository.AdmRepository;
 import webapp.crud_escola.Repository.VerificaCad_AdmRepository;
 import webapp.crud_escola.Repository.VerificaCad_AlunoRepository;
+import webapp.crud_escola.Repository.VerificaCad_ProfRepository;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,12 +28,36 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @Controller
 public class AdmController {
+
+
+ 
+    @RequestMapping(value = "/login-adm", method = RequestMethod.GET)
+    public ModelAndView abrirLoginAdm() {
+        ModelAndView mv = new ModelAndView("adm/login-adm");
+        return mv;
+    }
+    @RequestMapping(value = "/cad-adm", method = RequestMethod.GET)
+    public ModelAndView abrirCadAdm() {
+        ModelAndView mv = new ModelAndView("adm/cad-adm");
+        return mv;
+    }
+    @RequestMapping(value = "/cadastroAluno", method = RequestMethod.GET)
+    public ModelAndView abrirCadAluno() {
+        ModelAndView mv = new ModelAndView("interna/cadastroAluno");
+        return mv;
+    }
+
+
     @Autowired // identifica auto escrita(bin)
     private AdmRepository ar;
     @Autowired
     private VerificaCad_AdmRepository vcar;
     @Autowired
     private VerificaCad_AlunoRepository vcalur;
+    @Autowired
+     VerificaCad_ProfRepository vcpr;
+    
+ 
 
     boolean aceesoInternoAdm = false;
 
@@ -64,16 +91,16 @@ public class AdmController {
         boolean acessoSenha = senha.equals(ar.findByCpf(cpf).getSenha());
         if (acessoCPF && acessoSenha) {
             aceesoInternoAdm = true;
-            mv.addObject("msg", "LOGADO");
-            mv.addObject("cor", "verde");
+            attributes.addFlashAttribute("msg", "LOGIN REALIZADO");
+            attributes.addFlashAttribute("cor", "verde");
             String mensagem = "Login Efetuado";
             System.out.println(mensagem);
         } else {
             String mensagem = " Não Efetuado";
             System.out.println(mensagem);
             mv.setViewName("redirect:/login-adm");
-            mv.addObject("msg", "ERROR LOG");
-            mv.addObject("cor", "vermelho");
+            attributes.addFlashAttribute("msg", "ERRO NO LOGIN");
+            attributes.addFlashAttribute("cor", "vermelho");
         }
 
         return mv;
@@ -109,7 +136,7 @@ public class AdmController {
     @PostMapping("Pre-Cad-Aluno")
     public ModelAndView PreCadProf(VerificaCadAluno aluno, BindingResult result, RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView("redirect:/cadastroAluno");
-        boolean verificaCpf = vcar.existsById(aluno.getCpf());
+        boolean verificaCpf = vcalur.existsById(aluno.getCpf());
 
         // Verifica se os campos estão vazios
         if ( !aluno.getCpf().isEmpty() && !aluno.getSenha().isEmpty() ) {
@@ -126,6 +153,30 @@ public class AdmController {
                 mv.addObject("cor", "vermelho");
             }
         }     
+        return mv;
+    }
+
+    @PostMapping("pre-cad-Prof")
+    public ModelAndView PreCadProf(VerificaCadProf Ver_professor, RedirectAttributes attributes) {
+        ModelAndView mv = new ModelAndView("redirect:/cadastroProf");
+        
+        // Verifica se já existe um professor com o CPF fornecido
+        boolean verificaCpf = vcpr.existsById(Ver_professor.getCpf());
+    
+        if (!verificaCpf) {
+            // Se o CPF não existir, salva o novo professor
+            vcpr.save(Ver_professor);
+            attributes.addFlashAttribute("msg", "CADASTRO REALIZADO");
+            attributes.addFlashAttribute("cor", "verde");
+            } else {
+            // Se o CPF já existir, trata o erro de alguma maneira
+            String mensagem = "CPF já cadastrado";
+            System.out.println(mensagem);
+            mv.setViewName("redirect:/cadastroProf");
+            attributes.addFlashAttribute("msg", "CADASTRO ERRO");
+            attributes.addFlashAttribute("cor", "vermelho");
+        }
+        
         return mv;
     }
 }
